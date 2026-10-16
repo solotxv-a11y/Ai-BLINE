@@ -10,6 +10,9 @@ jobs:
   verify:
     runs-on: ubuntu-latest
 
+    env:
+      DATABASE_URL: "file:../db/custom.db"
+
     steps:
       - uses: actions/checkout@v4
 
@@ -19,6 +22,11 @@ jobs:
 
       - name: Install dependencies
         run: bun install
+
+      # Bun skips dependency postinstall scripts by default,
+      # so the Prisma client (with model types) must be generated explicitly.
+      - name: Generate Prisma Client
+        run: bunx prisma generate
 
       - name: Lint
         run: bun run lint
@@ -31,5 +39,3 @@ jobs:
 
       - name: Build
         run: bun run build
-        env:
-          DATABASE_URL: "file:../db/custom.db"
