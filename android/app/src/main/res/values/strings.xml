@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Ai BLINE</string>
+    <string name="title_activity_main">Ai BLINE</string>
+    <string name="package_name">com.aibline.app</string>
+    <string name="custom_url_scheme">com.aibline.app</string>
+</resources>

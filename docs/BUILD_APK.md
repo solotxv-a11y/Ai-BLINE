@@ -8,7 +8,30 @@ The Android build is a **native WebView shell (Capacitor)** that points to your 
 
 ---
 
-## Prerequisites
+## ⚡ Option A — Automated build (recommended, no local toolchain needed)
+
+The repo ships a GitHub Actions workflow (`.github/workflows/android-build.yml`)
+that builds the APK on GitHub's runners and attaches it to a Release.
+
+1. Go to **Actions → Android APK → Run workflow**.
+2. Enter your deployed app URL in `server_url`.
+3. Run — when it's green, download the APK from the workflow **Release**
+   (or the run's **Artifacts** section).
+
+You can also trigger it from the CLI:
+
+```bash
+gh workflow run "Android APK" -f server_url="https://your-app.vercel.app"
+```
+
+> The APK is a native shell that loads `server_url` at runtime —
+> if the URL isn't live, the app shows a built-in branded setup screen.
+
+---
+
+## 🛠 Option B — Manual local build
+
+### Prerequisites
 
 | Tool | Version | Check |
 | --- | --- | --- |

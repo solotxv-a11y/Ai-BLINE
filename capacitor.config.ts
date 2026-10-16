@@ -16,6 +16,8 @@ const config: CapacitorConfig = {
   server: {
     // Replace with your deployed app URL (e.g. https://ai-bline.vercel.app)
     url: process.env.AIBLINE_SERVER_URL ?? "https://ai-bline.vercel.app",
+    // Shown when the remote server can't be reached (offline / not deployed yet)
+    errorPath: "error.html",
     cleartext: false,
     androidScheme: "https",
   },

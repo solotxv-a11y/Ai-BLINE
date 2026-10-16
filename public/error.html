@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ai BLINE — Connection Error</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      background: #04060B;
+      color: #E7ECF5;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+      -webkit-user-select: none; user-select: none;
+    }
+    .card {
+      max-width: 420px; width: 100%;
+      background: #0A0F1C;
+      border: 1px solid #1B2540;
+      border-radius: 20px;
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: 0 0 60px rgba(0, 255, 200, 0.06);
+    }
+    .bolt {
+      width: 72px; height: 72px; margin: 0 auto 20px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #00E5A0 0%, #7C5CFF 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px;
+      box-shadow: 0 0 32px rgba(0, 229, 160, 0.35);
+    }
+    h1 { font-size: 22px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 8px; }
+    h1 span { color: #00E5A0; }
+    p.sub { color: #8B96AD; font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
+    .box {
+      text-align: left; background: #060B15; border: 1px solid #16203A;
+      border-radius: 12px; padding: 16px; margin-bottom: 20px;
+    }
+    .box h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #00E5A0; margin-bottom: 10px; }
+    .box ol { margin-left: 18px; color: #C4CEE0; font-size: 13.5px; line-height: 1.9; }
+    code {
+      background: #0D1526; border: 1px solid #1B2540; border-radius: 6px;
+      padding: 1px 6px; font-size: 12px; color: #7C5CFF; word-break: break-all;
+    }
+    button {
+      width: 100%; padding: 14px; border: 0; border-radius: 12px;
+      background: linear-gradient(135deg, #00E5A0 0%, #00B4D8 100%);
+      color: #04110C; font-weight: 700; font-size: 15px; letter-spacing: 0.4px;
+      cursor: pointer;
+    }
+    button:active { opacity: 0.85; }
+    .hint { margin-top: 14px; font-size: 11.5px; color: #5A6580; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="bolt">⚡</div>
+    <h1>Ai <span>BLINE</span></h1>
+    <p class="sub">The app shell is installed, but the AI server couldn't be reached.<br/>Follow the steps below to connect it.</p>
+    <div class="box">
+      <h2>Setup steps</h2>
+      <ol>
+        <li>Deploy the Ai BLINE web app (e.g. Vercel).</li>
+        <li>Rebuild this APK with your URL via the<br/><code>Android APK</code> GitHub Action.</li>
+        <li>Install the new APK and open it.</li>
+      </ol>
+    </div>
+    <button onclick="location.reload()">Try again</button>
+    <p class="hint">Server URL is set at build time via <code>AIBLINE_SERVER_URL</code> in <code>capacitor.config.ts</code>.</p>
+  </main>
+</body>
+</html>

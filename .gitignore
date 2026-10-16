@@ -60,8 +60,7 @@ server.log
 dev.log
 server.log
 
-# capacitor / android build artifacts
-/android
+# capacitor / ios build artifacts (android platform is versioned)
 /ios
 /.capacitor
 

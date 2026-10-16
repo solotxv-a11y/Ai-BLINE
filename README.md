@@ -149,12 +149,15 @@ phone frame with a marketing panel.
 Ai BLINE ships with everything needed to produce a real, installable APK:
 
 - `capacitor.config.ts` — ready-made Capacitor configuration (icon, splash, theme)
-- `docs/BUILD_APK.md` — **step-by-step guide** (deploy → wrap → `gradlew assembleDebug`)
+- `android/` — **versioned Capacitor Android platform** (open directly in Android Studio)
+- `docs/BUILD_APK.md` — step-by-step guide
+- ⚡ **Automated:** *Actions → Android APK → Run workflow* builds the APK on GitHub's
+  runners and attaches it to a Release — no local Android toolchain required.
 
 ```bash
-npm install @capacitor/core @capacitor/cli @capacitor/android
+npm install
 export AIBLINE_SERVER_URL="https://your-deployed-app.vercel.app"
-npx cap add android && npx cap sync android
+npx cap sync android
 cd android && ./gradlew assembleDebug
 # → android/app/build/outputs/apk/debug/app-debug.apk ✅
 ```
