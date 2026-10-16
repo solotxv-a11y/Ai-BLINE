@@ -72,3 +72,6 @@ server.log
 /upload
 /download
 Caddyfile
+
+# but keep the example template
+!.env.example
