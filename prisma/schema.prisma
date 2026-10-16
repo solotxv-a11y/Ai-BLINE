@@ -1,0 +1,52 @@
+// Ai BLINE — Prisma schema (SQLite)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// A chat conversation (general assistant or a specialized agent)
+model ChatSession {
+  id        String    @id @default(cuid())
+  title     String    @default("New chat")
+  agent     String    @default("general")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  messages  Message[]
+}
+
+// A single message inside a chat session
+model Message {
+  id        String      @id @default(cuid())
+  sessionId String
+  session   ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  role      String // "user" | "assistant"
+  content   String
+  createdAt DateTime    @default(now())
+
+  @@index([sessionId, createdAt])
+}
+
+// Saved content (saved chat replies, tool results)
+model SavedItem {
+  id        String   @id @default(cuid())
+  kind      String   @default("message") // "message" | "tool" | "lesson"
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+}
+
+// Academy lesson completion progress
+model LessonProgress {
+  id          String    @id @default(cuid())
+  pathId      String
+  lessonId    String
+  completed   Boolean   @default(false)
+  completedAt DateTime?
+
+  @@unique([pathId, lessonId])
+}
