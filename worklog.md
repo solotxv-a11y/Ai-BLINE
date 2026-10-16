@@ -157,3 +157,27 @@ Work Log:
 Stage Summary:
 - App is feature-complete and browser-verified end to end. Single route / renders the full 5-tab mobile experience with real AI backend.
 - Repo is GitHub-ready: docs, CI, license, PWA manifest + icons, Capacitor config and APK guide included.
+
+---
+Task ID: 4
+Agent: Z.ai Code (main orchestrator)
+Task: Build and release the Ai BLINE Android APK
+
+Work Log:
+- Reviewed capacitor.config.ts (wrapper strategy: WebView loads deployed web app via AIBLINE_SERVER_URL), docs/BUILD_APK.md, worklog; sandbox has JDK 21 but no Android SDK/Gradle.
+- Decided on GitHub Actions build path (ubuntu-latest has Android SDK preinstalled) producing a Release-attached APK.
+- Installed @capacitor/core@7.6.9, @capacitor/cli@7, @capacitor/android@7 via bun.
+- Generated assets/icon.png (1024) + assets/splash.png (2732, centered icon on #04060B) from public/icon-1024.png using PIL.
+- capacitor.config.ts: added server.errorPath = "error.html"; created public/error.html — branded Black Line setup/fallback page with retry button, shown when the remote URL is unreachable.
+- bunx cap add android → platform generated (compileSdk/targetSdk 35, minSdk 23); bumped versionName to 1.0.0; generated 87 launcher-icon/splash assets via bunx @capacitor/assets.
+- Un-ignored /android in .gitignore (platform is versioned; internal android/.gitignore covers build artifacts); fixed dangling comment.
+- Verified: tsc --noEmit clean for repo-tracked files (capacitor.config.ts now compiles with real deps), eslint clean; CI run on dac2bbb success.
+- Added .github/workflows/android-build.yml: workflow_dispatch with server_url input → bun install → cap sync (bakes URL into capacitor.config.json) → @capacitor/assets → gradlew assembleDebug → artifact upload → softprops release attach (tag apk-v${{ run_number }}).
+- Pushed dac2bbb; dispatched workflow via API (HTTP 204); run completed SUCCESS; release apk-v1 created with Ai-BLINE-v1.0.0-debug.apk (6.2 MB).
+- Downloaded the APK and verified zip contents: AndroidManifest.xml, classes.dex, baked capacitor.config.json (url + errorPath), assets/public/error.html, launcher icons, splash.
+
+Stage Summary:
+- APK pipeline is permanent repo infra: Actions → "Android APK" → Run workflow with any server_url → installable debug APK lands in Releases automatically.
+- Release: https://github.com/solotxv-a11y/Ai-BLINE/releases/tag/apk-v1 (Ai-BLINE-v1.0.0-debug.apk, com.aibline.app v1.0.0).
+- Current build loads the placeholder https://ai-bline.vercel.app; when a real deployment URL exists, re-dispatch the workflow to produce a fully functional build. Until then the app shows the branded setup screen.
+- README + docs/BUILD_APK.md updated with Option A (automated) / Option B (manual) build guides.
